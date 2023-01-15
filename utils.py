@@ -1,10 +1,25 @@
 from PIL import Image, ImageDraw
+import pyqrcode
+import pyzbar.pyzbar
 
 
+# Generate QRCode
+def generate_qrcode(qrcode_content, save_location, background_colour=(0, 0, 0, 255), qrcode_colour=(0, 255, 0, 255), qrcode_scale=5):
+    url = pyqrcode.create(qrcode_content, error='H')
+    url.png(save_location, module_color=qrcode_colour, background=background_colour, scale=qrcode_scale)
+
+
+# Decode CRQode
+def decode_qrcode(qrcode_image):
+    return pyzbar.pyzbar.decode(qrcode_image)
+
+
+# save an image in compressed form
 def save_compressed_image(img, safe_location, image_codec="JPEG", save_quality=85):
     img.save(safe_location, image_codec, optimize=True, quality=save_quality)
 
 
+# watermark an image
 def watermark_image(image_path, image = None, watermark_text = "Watermark", watermark_location = (5, 5), watermark_image_path = None, watermark_image_location = (30, 5), watermark_image_size = (50, 50), safe_location = None, return_image = True, save_compressed = False, save_image_codec = "JPEG", save_quality_level = 5):
     # TODO check, if every value is provided in the right format so it can be used. Else return an error message
 
@@ -34,6 +49,7 @@ def watermark_image(image_path, image = None, watermark_text = "Watermark", wate
         # return image
         if return_image:
             return watermarked
+
 
 # Send a message when script is executed
 if __name__ == "__main__":
