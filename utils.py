@@ -7,6 +7,8 @@ def compress_image(image_path, safe_location):
 
 
 def watermark_image(image_path, image = None, watermark_text = "Watermark", watermark_location = (5, 5), watermark_image_path = None, watermark_image_location = (5, 30), watermark_image_size = (50, 50), safe_location = None, return_image = True):
+    # TODO check, if every value is provided in the right format so it can be used. Else return an error message
+
     # either use provided image or find image via provided path
     if image is not None:
         img = image
